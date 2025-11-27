@@ -22,6 +22,51 @@ def push(text):
     )
 
 
+def verify_recaptcha(token):
+    """Verify reCAPTCHA v3 token with Google"""
+    secret_key = os.getenv("RECAPTCHA_SECRET_KEY")
+    
+    if not secret_key:
+        print("Warning: RECAPTCHA_SECRET_KEY not set", flush=True)
+        return False, "reCAPTCHA secret key not configured"
+    
+    if not token:
+        return False, "reCAPTCHA token missing"
+    
+    try:
+        response = requests.post(
+            "https://www.google.com/recaptcha/api/siteverify",
+            data={
+                "secret": secret_key,
+                "response": token
+            },
+            timeout=5
+        )
+        
+        result = response.json()
+        
+        # For reCAPTCHA v3, check the score (0.0 - 1.0)
+        # 0.0 is very likely a bot, 1.0 is very likely a human
+        success = result.get("success", False)
+        score = result.get("score", 0.0)
+        action = result.get("action", "")
+        
+        print(f"reCAPTCHA verification: success={success}, score={score}, action={action}", flush=True)
+        
+        # Require score of at least 0.5 for v3
+        if success and score >= 0.5:
+            return True, None
+        elif success:
+            return False, f"reCAPTCHA score too low: {score}"
+        else:
+            error_codes = result.get("error-codes", [])
+            return False, f"reCAPTCHA verification failed: {error_codes}"
+            
+    except Exception as e:
+        print(f"reCAPTCHA verification error: {str(e)}", flush=True)
+        return False, f"reCAPTCHA verification error: {str(e)}"
+
+
 def record_user_details(email, name="Name not provided", notes="not provided"):
     push(f"Recording {name} with email {email} and notes {notes}")
     return {"recorded": "ok"}
@@ -147,6 +192,17 @@ def health_check():
 def contact_endpoint():
     try:
         payload = request.get_json(silent=True) or {}
+        
+        # Verify reCAPTCHA token
+        recaptcha_token = payload.get("recaptchaToken")
+        is_valid, error_message = verify_recaptcha(recaptcha_token)
+        
+        if not is_valid:
+            return jsonify({
+                "error": "reCAPTCHA verification failed",
+                "details": error_message
+            }), 400
+        
         full_name = payload.get("fullName", "Not provided")
         email = payload.get("email", "Not provided")
         company = payload.get("company", "Not provided")
@@ -219,4 +275,3 @@ if __name__ == "__main__":
     # Default to port 8000 for local dev
     port = int(os.getenv("PORT", "8000"))
     app.run(host="0.0.0.0", port=port, debug=True)
-    
