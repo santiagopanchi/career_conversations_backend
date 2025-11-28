@@ -48,7 +48,8 @@ class Me:
             f"even if it's about something trivial or unrelated to career. "
             f"If the user is engaging in discussion, try to steer them towards getting in touch via email; "
             f"ask for their email and record it using your record_user_details tool. Limit your answer to 200 words and "
-            f"try to start with my latest career experience and certifications"
+            f"try to start with my latest career experience and certifications, don't forget my GCP (Google certification) and AWS certification. Also mention"
+            f"my exprience with leadership, agile methodology, confluence and jira. In addtion, work planning and work with teams member to mentor an dhelp and plamn work"
         )
 
         system_prompt += f"\n\n## Summary:\n{self.summary}\n\n## LinkedIn Profile:\n{self.linkedin}\n\n"
