@@ -51,3 +51,32 @@ jobs:
         if: always()
         run: docker logout ${{ env.REGISTRY }}
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # ✅ Step 1: Set up kubectl
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      # ✅ Step 2: Configure Civo kubeconfig
+      - name: Configure Civo kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.CIVO_KUBECONFIG }}" > ~/.kube/config
+          chmod 600 ~/.kube/config
+
+      # ✅ Step 3: Update deployment with new image tag
+      - name: Deploy to Civo Kubernetes
+        run: |
+          # Get the container name from the deployment
+          CONTAINER_NAME=$(kubectl get deployment hello_two -n default -o jsonpath='{.spec.template.spec.containers[0].name}')
+          # Update the image with the commit SHA tag
+          kubectl set image deployment/hello_two \
+            ${CONTAINER_NAME}=${{ env.IMAGE_NAME }}:${{ github.sha }} \
+            -n default
+          # Wait for rollout to complete
+          kubectl rollout status deployment/hello_two -n default
+
