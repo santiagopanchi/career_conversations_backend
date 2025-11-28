@@ -72,11 +72,11 @@ jobs:
       - name: Deploy to Civo Kubernetes
         run: |
           # Get the container name from the deployment
-          CONTAINER_NAME=$(kubectl get deployment hello_two -n default -o jsonpath='{.spec.template.spec.containers[0].name}')
+          CONTAINER_NAME=$(kubectl get deployment hello-two -n default -o jsonpath='{.spec.template.spec.containers[0].name}')
           # Update the image with the commit SHA tag
-          kubectl set image deployment/hello_two \
+          kubectl set image deployment/hello-two \
             ${CONTAINER_NAME}=${{ env.IMAGE_NAME }}:${{ github.sha }} \
             -n default
           # Wait for rollout to complete
-          kubectl rollout status deployment/hello_two -n default
+          kubectl rollout status deployment/hello-two -n default
 
