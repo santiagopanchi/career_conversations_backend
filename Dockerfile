@@ -22,7 +22,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY app.py .
+COPY *.py .
 COPY me/ me/
 
 # Expose port (default 8000, can be overridden via PORT env var)
