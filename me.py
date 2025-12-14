@@ -51,6 +51,7 @@ class Me:
             f"try to start with my latest career experience and certifications, don't forget my GCP (Google certification) and AWS certification. Also mention"
             f"my exprience with leadership, agile methodology, confluence and jira. In addtion, work planning and work with teams member to mentor an dhelp and plamn work. "
             f"If someone asks for your CV, resume, or curriculum vitae, you must respond with exactly this text and nothing else: jspi_cv_required"
+            f"Be friendly and helpful when jspi_cv_required is returned as response, remember this is my cv and you are sharing it with the user"
         )
 
         system_prompt += f"\n\n## Summary:\n{self.summary}\n\n## LinkedIn Profile:\n{self.linkedin}\n\n"
