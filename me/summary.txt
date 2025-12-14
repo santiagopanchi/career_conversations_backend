@@ -1,2 +1,13 @@
 My name is Javier Santiago Panchi. I my work usially peole call me Javier, but my relatives and close friends call me Santiago. I'm an entrepreneur, software engineer and data scientist. I'm originally from Quito, Ecuador, but I moved to Brisbane, Australia in 2011, I am an Australian Citizen.
 I love all foods, particularly Thai food, but strangely I'm repelled by almost all forms of spice food. I'm not allergic, I just hate the taste. My favourite sport is soccer and I am coach of my son soccer team, it has been a great experience of teaching and learning. My favoirite soccer team is LDU from Ecuador also I like to play swim and tennis. 
+In addition, I have been using these technologies during my career:
+At MightyIdeas (my own innitative): MCP, CrwAi, LangChain, LangSmit, LangGraph, OpenAI api, Anthropic, Google AI, DeepSeek, Groq, Sendgrid, Twilio, Microsoft Autogen, AutoGenCore, n8n, serper, brave search, polygon, pushover.
+At Corelogic, Cotality: NodeJS, MongoDB, Apache Airflow, Kubernetes, Docker, AWS, Google Cloud, Big Query, Python, Serverless, Lucid charts, Looker, Playwrigth, Auth0, React Native, Java, Spring Framework, Elastic Searchm, PostgreSQL, Python.
+At ABB: ReactJS, JEST (RTL and Enzyme), Material UI, Python, JEE, Spring Framework, Maven, Gradle, Typescript, Apache Kafka, PostgreSQL.o DevOps: AWS , GCP, Terraform, Docker, Linux, Windows, Gitlab, o Monitoring: Splunk, Uptrends, PagerDuty, Apigee, Apache Airflow, Git, Scrum Master, Agile Methodology, Jira, Confluence, Microsoft Teams, React, JEST (RTL and Enzyme), Material UI, Python, JEE, Spring Framework, Maven, NodeJS, Javascript, Typescript, Apache Kafka, PostgreSQL, NodeRED. Flowable, KeyCloak Azure, AWS, ABB, Kubernetes (ABB Epiphany), Docker, Linux, Windows, Apache, Mod Security, Open Nebula, Oracle DB, Selenium, Elastic Search.
+At MightyIdeas (my innitiative): Angular2, NodeJS, Auth0, Stripe, MongoDB, AWS and Google Cloud Speech API
+At fugro Roames :AngularJS, Angular2, Typescript, Bootstrap,  JEE, Gradle, AWS, Ionic, Apache Cordova, NodeJS, MongoDB, Glassfish, GWT, Docker, Auth0, OSM., Google Earth, Python, SQLServer. Agile Methodology, Jira, Confluence, Bitbucket, Bamboo
+As researcher at UQ (University of Queensland): JAVA, JSP, JQuery, AngularJS and Bootstrap.
+At SAP: SAP HANA DB, Java, JSP, iOS, Android, JQuery.
+At Yage: Java, Javascript, C#, PHP, Konacart CMS, EJB, iOS, Android, Facebook API, Twitter API, EJBs, JSF frameworks.
+At Zenithalsol: Java, Javascript, JQuery, MySQL, Glassfish
+At Fitbank: Java, Maven, JSP, C#, .NET, SQLServer, Oracle
