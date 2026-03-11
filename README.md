@@ -10,21 +10,27 @@ Flask API exposing a conversational chat endpoint backed by OpenAI, using your e
 OPENAI_API_KEY=sk-...
 PUSHOVER_TOKEN=...
 PUSHOVER_USER=...
+RESEND_API_KEY=re_...
+RESEND_FROM=your-email@yourdomain.com
+RECAPTCHA_SECRET_KEY=...
 ```
 
-2. Install dependencies:
+2. Create and activate virtual environment, then install dependencies:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-3. Run the server:
+3. Run the server (make sure the virtual environment is activated):
 
 ```bash
+source venv/bin/activate  # Activate virtual environment if not already active
 python app.py
 ```
+
+**Note:** Always activate the virtual environment before running the app. If you see `ModuleNotFoundError`, it means the virtual environment is not activated.
 
 Server starts on `http://localhost:8000`.
 
@@ -60,6 +66,33 @@ curl http://localhost:8000/health
 Notes:
 - `history` is optional and should be a list of `{role, content}` messages.
 - The server reads `me/summary.txt` and `me/linkedin.pdf` at startup; ensure those files exist.
+
+## Contact Endpoint
+
+- URL: `POST /contact`
+- Body (JSON):
+
+```json
+{
+  "fullName": "Jane Smith",
+  "email": "jane@example.com",
+  "company": "Acme Inc",
+  "projectFocus": "Web Development",
+  "message": "I would like to discuss a new project.",
+  "recaptchaToken": "token_from_recaptcha"
+}
+```
+
+- Response:
+
+```json
+{
+  "status": "ok",
+  "message": "Email sent successfully"
+}
+```
+
+The contact form sends a formatted HTML email to `santiago@mightyideas.org` using Resend.
 
 ## Docker Setup
 
@@ -120,6 +153,9 @@ docker run -d \
 - `OPENAI_API_KEY` - OpenAI API key for chat functionality
 - `PUSHOVER_TOKEN` - Pushover API token for notifications
 - `PUSHOVER_USER` - Pushover user key for notifications
+- `RESEND_API_KEY` - Resend API key for sending emails
+- `RESEND_FROM` - Email address to send from (defaults to onboarding@resend.dev)
+- `RECAPTCHA_SECRET_KEY` - reCAPTCHA secret key for contact form verification
 - `PORT` - (Optional) Server port, defaults to 8000
 
 Make sure to set these when running the container, either via `--env-file .env` or individual `-e` flags.
